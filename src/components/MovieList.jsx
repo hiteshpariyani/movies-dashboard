@@ -370,7 +370,7 @@ const MovieList = () => {
               <Tr>
                 <Th>Title</Th>
                 <Th>Genre(s)</Th>
-                <Th>Ratings</Th>
+                <Th>Ratings (Out of 10)</Th>
                 <Th>Year of release</Th>
                 <Th>Metacritic Rating</Th>
                 <Th>Runtime</Th>
@@ -400,9 +400,21 @@ const MovieList = () => {
                       movie.genre
                     )}
                   </Td>
-                  <Td>{movie.ratings}</Td>
+                  <Td>
+                    <span>⭐ </span>
+                    {/* Dynamically convert ratings to out of 10 */}
+                    {(
+                      movie.Ratings.reduce((acc, rating) => {
+                        const value = parseFloat(rating.value);
+                        return acc + (value > 10 ? value / 10 : value);
+                      }, 0) / movie.Ratings.length
+                    ).toFixed(2).replace(/\.00$/, '')}
+                  </Td>
                   <Td>{movie.year}</Td>
-                  <Td>{movie.metacritic}</Td>
+                  <Td>
+                    {/* Display Metacritic rating if present */}
+                    {movie.meta_score ? movie.meta_score : 'N/A'}
+                  </Td>
                   <Td>{movie.runtime}</Td>
                   <Td>{new Date(movie.date).toLocaleDateString()}</Td>
                 </Tr>
