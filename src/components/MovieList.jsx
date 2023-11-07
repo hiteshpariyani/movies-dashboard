@@ -5,7 +5,6 @@ import {
   Flex,
   Heading,
   Input,
-  Select,
   Table,
   Thead,
   Tbody,
@@ -19,14 +18,20 @@ import {
   SimpleGrid,
   Spinner,
   useToast,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  Checkbox,
 } from "@chakra-ui/react";
+import { ChevronDownIcon } from "@chakra-ui/icons";
 
 import logo from "../assets/movies-hub-logo.jpeg";
 
 const MovieList = () => {
   const toast = useToast();
   const [searchTerm, setSearchTerm] = useState("");
-  const [genreFilter, setGenreFilter] = useState("All Genres");
+  const [genreFilter, setGenreFilter] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [allGenres, setAllGenres] = useState([]);
   const [originalMovies, setOriginalMovies] = useState([]); // New state for original unfiltered movies
@@ -57,7 +62,7 @@ const MovieList = () => {
       const genresSet = new Set(flatMovies.flatMap((movie) => movie.genre));
 
       // Adding 'All Genres' to the beginning of the genres array
-      setAllGenres(["All Genres", ...Array.from(genresSet)]);
+      setAllGenres([...Array.from(genresSet)]);
 
       setFilteredMovies(flatMovies);
       setOriginalMovies(flatMovies); // Save the original unfiltered movies
@@ -114,7 +119,8 @@ const MovieList = () => {
       (movie) =>
         (movie.title.toLowerCase().includes(searchTermLower) ||
           searchTermLower === "") &&
-        (genreFilter === "All Genres" || movie.genre.includes(genreFilter))
+        (genreFilter.length === 0 ||
+          movie.genre.some((g) => genreFilter.includes(g)))
     );
     // Sort filtered movies by date in ascending order
     filtered.sort((a, b) => a.date.getTime() - b.date.getTime());
@@ -123,7 +129,7 @@ const MovieList = () => {
 
   const handleReset = () => {
     setSearchTerm("");
-    setGenreFilter("All Genres");
+    setGenreFilter([]);
     setFilteredMovies(originalMovies); // Reset to all movies
   };
 
@@ -151,7 +157,7 @@ const MovieList = () => {
   return (
     <Box minHeight="100vh">
       <Box
-        bg={`url(${logo}) center/cover fixed`}
+        bg={`url(${logo}) no-repeat center`}
         opacity={0.05}
         position="fixed"
         top={0}
@@ -177,8 +183,14 @@ const MovieList = () => {
           left="50%"
           transform="translate(-50%, -50%)"
         >
-          <Heading as='h3' size='lg' mb={2}>Failed to fetch movie data</Heading>
-          <Button colorScheme="teal" variant="outline" onClick={initializeMovies}>
+          <Heading as="h3" size="lg" mb={2}>
+            Failed to fetch movie data
+          </Heading>
+          <Button
+            colorScheme="teal"
+            variant="outline"
+            onClick={initializeMovies}
+          >
             Retry
           </Button>
         </Box>
@@ -231,20 +243,53 @@ const MovieList = () => {
           </HStack>
           <Flex>
             <Box ml={4}>
-              <Select
-                variant="filled"
-                color="teal.800"
-                bg="white"
-                value={genreFilter}
-                onChange={(e) => setGenreFilter(e.target.value)}
-                disabled={loading}
-              >
-                {allGenres.map((genre, index) => (
-                  <option key={index} value={genre}>
-                    {genre}
-                  </option>
-                ))}
-              </Select>
+              <Menu>
+                <MenuButton
+                  as={Button}
+                  rightIcon={<ChevronDownIcon />}
+                  px={4}
+                  py={2}
+                  maxW="150px" // Set a fixed width for the button
+                  transition="all 0.2s"
+                  borderRadius="md"
+                  borderWidth="1px"
+                  _focus={{ boxShadow: "outline" }}
+                  className="genre-filter-button"
+                  sx={{
+                    '> span:first-child': {
+                      textOverflow: "ellipsis",
+                      overflow: "hidden",
+                    }
+                  }}
+                >
+                  <Box as="span">
+                    {genreFilter.length > 0
+                      ? `${genreFilter.join(", ")}`
+                      : `Genres`}
+                  </Box>
+                </MenuButton>
+                <MenuList>
+                  {allGenres.map((genre, index) => (
+                    <MenuItem key={index}>
+                      <Checkbox
+                        isChecked={genreFilter.includes(genre)}
+                        onChange={() => {
+                          if (genreFilter.includes(genre)) {
+                            setGenreFilter(
+                              genreFilter.filter((g) => g !== genre)
+                            );
+                          } else {
+                            setGenreFilter([...genreFilter, genre]);
+                          }
+                        }}
+                        color={"black"}
+                      >
+                        {genre}
+                      </Checkbox>
+                    </MenuItem>
+                  ))}
+                </MenuList>
+              </Menu>
             </Box>
           </Flex>
         </Flex>
@@ -376,7 +421,7 @@ const MovieList = () => {
       </Box>
 
       {filteredMovies.length === 0 &&
-        (searchTerm || genreFilter !== "All Genres") && (
+        (searchTerm || genreFilter.length > 0) && (
           <Text textAlign="center" mt={4} color="red.500" fontWeight="bold">
             No movies found
           </Text>
