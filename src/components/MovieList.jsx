@@ -255,28 +255,31 @@ const MovieList = () => {
     }, 300);
   };
 
+  const focusSearchInput = () => {
+    searchInputRef.current.focus();
+  };
+
+  const handleEscKey = (event) => {
+    if (event.key === "Escape") {
+      handleReset();
+    }
+  };
+
+  const addEscKeyListener = () => {
+    document.addEventListener("keydown", handleEscKey);
+
+    return () => {
+      document.removeEventListener("keydown", handleEscKey);
+    };
+  };
+
   useEffect(() => {
     initializeMovies();
   }, []);
 
-  useEffect(() => {
-    // Focus on the search input when the component mounts
-    searchInputRef.current.focus();
+  useEffect(focusSearchInput, []);
 
-    // Add event listener for 'Esc' key to clear search
-    const handleEscKey = (event) => {
-      if (event.key === "Escape") {
-        handleReset();
-      }
-    };
-
-    document.addEventListener("keydown", handleEscKey);
-
-    // Cleanup the event listener when the component unmounts
-    return () => {
-      document.removeEventListener("keydown", handleEscKey);
-    };
-  }, []);
+  useEffect(addEscKeyListener, []);
 
   useEffect(() => {
     // Call handleSearch whenever searchTerm or genreFilter is updated
@@ -301,6 +304,25 @@ const MovieList = () => {
     setSearchTerm("");
     setGenreFilter("All Genres");
     initializeMovies(); // Reset to all movies
+  };
+
+  const renderMonthAndYear = (movie, index) => {
+    const currentMonth = new Date(movie.date).toLocaleString("default", {
+      month: "long",
+    });
+    const prevMonth =
+      index > 0
+        ? new Date(filteredMovies[index - 1].date).toLocaleString("default", {
+            month: "long",
+          })
+        : null;
+    const currentYear = new Date(movie.date).getFullYear();
+
+    return currentMonth !== prevMonth ? `${currentMonth} ${currentYear}` : "";
+  };
+
+  const renderDay = (movie) => {
+    return new Date(movie.date).toLocaleDateString(undefined, { day: "numeric" });
   };
 
   return (
@@ -404,31 +426,8 @@ const MovieList = () => {
             <Tbody>
               {filteredMovies.map((movie, index) => (
                 <Tr key={index}>
-                  <Td>
-                    {(() => {
-                      const currentMonth = new Date(movie.date).toLocaleString(
-                        "default",
-                        { month: "long" }
-                      );
-                      const prevMonth =
-                        index > 0
-                          ? new Date(
-                              filteredMovies[index - 1].date
-                            ).toLocaleString("default", { month: "long" })
-                          : null;
-                      const currentYear = new Date(movie.date).getFullYear();
-
-                      // Append year if only month is displayed
-                      return currentMonth !== prevMonth
-                        ? `${currentMonth} ${currentYear}`
-                        : "";
-                    })()}
-                  </Td>
-                  <Td>
-                    {new Date(movie.date).toLocaleDateString(undefined, {
-                      day: "numeric",
-                    })}
-                  </Td>
+                  <Td>{renderMonthAndYear(movie, index)}</Td>
+                  <Td>{renderDay(movie)}</Td>
                   <Td>
                     <Flex align="center">
                       <Image
