@@ -13,14 +13,13 @@ import {
   Th,
   Td,
   Image,
-  VStack,
   HStack,
   Text,
   Button,
   SimpleGrid,
 } from "@chakra-ui/react";
 
-import logo from '../assets/movies-hub-logo.jpeg';
+import logo from "../assets/movies-hub-logo.jpeg";
 
 const MovieList = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -33,91 +32,7 @@ const MovieList = () => {
   // Updated sample data with dates
   const movieData = [
     {
-      date: "2019-06-21T11:10:04.781Z",
-      movies: [
-        {
-          title: "In the Mood for Love",
-          year: "2000",
-          rated: "PG",
-          released: "09 Mar 2001",
-          runtime: "98 min",
-          genre: ["Drama", "Romance"],
-          director: "Kar-Wai Wong",
-          writer: "Kar-Wai Wong",
-          actors:
-            "Maggie Cheung, Tony Chiu-Wai Leung, Ping Lam Siu, Tung Cho 'Joe' Cheung",
-          plot: "Two neighbors, a woman and a man, form a strong bond after both suspect extramarital activities of their spouses. However, they agree to keep their bond platonic so as not to commit similar wrongs.",
-          language: "Cantonese, Shanghainese, French, Spanish",
-          country: "Hong Kong, China",
-          awards:
-            "Nominated for 1 BAFTA Film Award. Another 44 wins & 47 nominations.",
-          poster:
-            "https://m.media-amazon.com/images/M/MV5BYjZjODRlMjQtMjJlYy00ZDBjLTkyYTQtZGQxZTk5NzJhYmNmXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg",
-          Ratings: [
-            {
-              source: "Internet Movie Database",
-              value: "8.1/10",
-            },
-            {
-              source: "Rotten Tomatoes",
-              value: "90%",
-            },
-            {
-              source: "Metacritic",
-              value: "85/100",
-            },
-          ],
-          meta_score: "85",
-          imdb_rating: "8.1",
-          imdb_votes: "105,461",
-          imdb_id: "tt0118694",
-          type: "movie",
-          dvd: "05 Mar 2002",
-          box_office: "N/A",
-          production: "USA Films",
-          website: "http://www.wkw-inthemoodforlove.com",
-        },
-        {
-          title: "Fantastic Planet",
-          year: "1973",
-          rated: "PG",
-          released: "01 Dec 1973",
-          runtime: "72 min",
-          genre: ["Animation", "Sci-Fi"],
-          director: "René Laloux",
-          writer:
-            "Stefan Wul (novel), Roland Topor (adaptation), René Laloux (adaptation)",
-          actors: "Jennifer Drake, Eric Baugin, Jean Topart, Jean Valmont",
-          plot: "On a faraway planet where blue giants rule, oppressed humanoids rebel against their machine-like leaders.",
-          language: "French, Czech",
-          country: "France, Czechoslovakia",
-          awards: "1 win & 2 nominations.",
-          poster:
-            "https://m.media-amazon.com/images/M/MV5BYjhhMDFlZDctYzg1Mi00ZmZiLTgyNTgtM2NkMjRkNzYwZmQ0XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg",
-          Ratings: [
-            {
-              source: "Internet Movie Database",
-              value: "7.8/10",
-            },
-            {
-              source: "Rotten Tomatoes",
-              value: "89%",
-            },
-          ],
-          meta_score: "N/A",
-          imdb_rating: "7.8",
-          imdb_votes: "20,216",
-          imdb_id: "tt0070544",
-          type: "movie",
-          dvd: "23 Oct 2007",
-          box_office: "N/A",
-          production: "New World Pictures",
-          website: "N/A",
-        },
-      ],
-    },
-    {
-      date: "2019-06-28T11:10:04.781Z",
+      date: "2019-05-28T11:10:04.781Z",
       movies: [
         {
           title: "The Love Witch",
@@ -235,12 +150,99 @@ const MovieList = () => {
         },
       ],
     },
+    {
+      date: "2019-06-21T11:10:04.781Z",
+      movies: [
+        {
+          title: "In the Mood for Love",
+          year: "2000",
+          rated: "PG",
+          released: "09 Mar 2001",
+          runtime: "98 min",
+          genre: ["Drama", "Romance"],
+          director: "Kar-Wai Wong",
+          writer: "Kar-Wai Wong",
+          actors:
+            "Maggie Cheung, Tony Chiu-Wai Leung, Ping Lam Siu, Tung Cho 'Joe' Cheung",
+          plot: "Two neighbors, a woman and a man, form a strong bond after both suspect extramarital activities of their spouses. However, they agree to keep their bond platonic so as not to commit similar wrongs.",
+          language: "Cantonese, Shanghainese, French, Spanish",
+          country: "Hong Kong, China",
+          awards:
+            "Nominated for 1 BAFTA Film Award. Another 44 wins & 47 nominations.",
+          poster:
+            "https://m.media-amazon.com/images/M/MV5BYjZjODRlMjQtMjJlYy00ZDBjLTkyYTQtZGQxZTk5NzJhYmNmXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg",
+          Ratings: [
+            {
+              source: "Internet Movie Database",
+              value: "8.1/10",
+            },
+            {
+              source: "Rotten Tomatoes",
+              value: "90%",
+            },
+            {
+              source: "Metacritic",
+              value: "85/100",
+            },
+          ],
+          meta_score: "85",
+          imdb_rating: "8.1",
+          imdb_votes: "105,461",
+          imdb_id: "tt0118694",
+          type: "movie",
+          dvd: "05 Mar 2002",
+          box_office: "N/A",
+          production: "USA Films",
+          website: "http://www.wkw-inthemoodforlove.com",
+        },
+        {
+          title: "Fantastic Planet",
+          year: "1973",
+          rated: "PG",
+          released: "01 Dec 1973",
+          runtime: "72 min",
+          genre: ["Animation", "Sci-Fi"],
+          director: "René Laloux",
+          writer:
+            "Stefan Wul (novel), Roland Topor (adaptation), René Laloux (adaptation)",
+          actors: "Jennifer Drake, Eric Baugin, Jean Topart, Jean Valmont",
+          plot: "On a faraway planet where blue giants rule, oppressed humanoids rebel against their machine-like leaders.",
+          language: "French, Czech",
+          country: "France, Czechoslovakia",
+          awards: "1 win & 2 nominations.",
+          poster:
+            "https://m.media-amazon.com/images/M/MV5BYjhhMDFlZDctYzg1Mi00ZmZiLTgyNTgtM2NkMjRkNzYwZmQ0XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg",
+          Ratings: [
+            {
+              source: "Internet Movie Database",
+              value: "7.8/10",
+            },
+            {
+              source: "Rotten Tomatoes",
+              value: "89%",
+            },
+          ],
+          meta_score: "N/A",
+          imdb_rating: "7.8",
+          imdb_votes: "20,216",
+          imdb_id: "tt0070544",
+          type: "movie",
+          dvd: "23 Oct 2007",
+          box_office: "N/A",
+          production: "New World Pictures",
+          website: "N/A",
+        },
+      ],
+    },
   ];
 
   const initializeMovies = () => {
     const flatMovies = movieData.flatMap((data) =>
-      data.movies.map((movie) => ({ ...movie, date: data.date }))
+      data.movies.map((movie) => ({ ...movie, date: new Date(data.date) }))
     );
+
+    // Sort movies by date in ascending order
+    flatMovies.sort((a, b) => a.date.getTime() - b.date.getTime());
 
     const genresSet = new Set(flatMovies.flatMap((movie) => movie.genre));
 
@@ -290,6 +292,8 @@ const MovieList = () => {
           searchTermLower === "") &&
         (genreFilter === "All Genres" || movie.genre.includes(genreFilter))
     );
+    // Sort filtered movies by date in ascending order
+    filtered.sort((a, b) => a.date.getTime() - b.date.getTime());
     setFilteredMovies(filtered);
   };
 
@@ -387,18 +391,44 @@ const MovieList = () => {
           >
             <Thead>
               <Tr>
+                <Th>Month</Th>
+                <Th>Date</Th>
                 <Th>Title</Th>
                 <Th>Genre(s)</Th>
                 <Th>Ratings (Out of 10)</Th>
                 <Th>Year of release</Th>
                 <Th>Metacritic Rating</Th>
                 <Th>Runtime</Th>
-                <Th>Date</Th>
               </Tr>
             </Thead>
             <Tbody>
               {filteredMovies.map((movie, index) => (
                 <Tr key={index}>
+                  <Td>
+                    {(() => {
+                      const currentMonth = new Date(movie.date).toLocaleString(
+                        "default",
+                        { month: "long" }
+                      );
+                      const prevMonth =
+                        index > 0
+                          ? new Date(
+                              filteredMovies[index - 1].date
+                            ).toLocaleString("default", { month: "long" })
+                          : null;
+                      const currentYear = new Date(movie.date).getFullYear();
+
+                      // Append year if only month is displayed
+                      return currentMonth !== prevMonth
+                        ? `${currentMonth} ${currentYear}`
+                        : "";
+                    })()}
+                  </Td>
+                  <Td>
+                    {new Date(movie.date).toLocaleDateString(undefined, {
+                      day: "numeric",
+                    })}
+                  </Td>
                   <Td>
                     <Flex align="center">
                       <Image
@@ -435,7 +465,6 @@ const MovieList = () => {
                     {movie.meta_score ? movie.meta_score : "N/A"}
                   </Td>
                   <Td>{movie.runtime}</Td>
-                  <Td>{new Date(movie.date).toLocaleDateString()}</Td>
                 </Tr>
               ))}
             </Tbody>
@@ -503,11 +532,6 @@ const MovieList = () => {
             No movies found
           </Text>
         )}
-
-      <Flex align="center" justify="center" bg="teal.700" color="white" p={4}>
-        <VStack spacing={2}>{/* Add social media links here */}</VStack>
-        <VStack spacing={2}>{/* About Us and Contact links here */}</VStack>
-      </Flex>
     </Box>
   );
 };
